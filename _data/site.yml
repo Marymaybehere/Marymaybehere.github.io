@@ -1,27 +1,23 @@
-name: Sara
-tagline: Biophysicist · painter · farmer · cook · photographer · hiker
+name: Maryam Hejri
+tagline: biophysicist · painter · food enthusiast · balcony gardener ·
+  photography enthusiast · hiker
 headline: I study how bacteria grow, and I grow a few things myself.
-bio: >-
-  By day I work on the physics of bacterial colonies: how they spread, how they stop,
-  and how droplets decide where cells land. The rest of the time I'm in the garden,
-  at the easel, in the kitchen, or somewhere on a trail with a camera. This is where I keep all of it.
-portrait: ""
-email: you@example.com
+bio: "By day I work on the physics of bacterial colonies: how they spread, how
+  they stop, and how droplets decide where cells land. The rest of the time I'm
+  in the garden, at the easel, in the kitchen, or somewhere on a trail with a
+  camera. This is where I keep all of it."
+email: mah.hejri@gmail.com
 links:
   - label: Google Scholar
-    url: https://scholar.google.com
-  - label: ORCID
-    url: https://orcid.org
-  - label: Instagram
-    url: https://instagram.com
-cv: ""
-
-science_title: Physics of living surfaces
-science_intro: I combine experiments and mathematical models to understand how bacterial communities organize themselves on surfaces.
+    url: https://scholar.google.com/citations?user=D9aqiywAAAAJ&hl=en
+science_title: Physics of Microbes
+science_intro: I combine experiments and mathematical models to understand how
+  bacterial communities organize themselves on surfaces.
 kitchen_title: Recipes I keep coming back to
 kitchen_intro: Mostly from the garden, tested more times than I'd like to admit.
 farm_title: Notes from the field
-farm_intro: A running log of what I planted, what worked and what the weather had other plans for.
+farm_intro: A running log of what I planted, what worked and what the weather
+  had other plans for.
 studio_title: Paintings & photographs
 studio_intro: Watercolors, oils and whatever the camera caught along the way.
 trails_title: Hikes worth the climb
