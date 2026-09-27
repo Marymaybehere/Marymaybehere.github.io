@@ -1,0 +1,1 @@
+Photos you upload through the editor are saved here.

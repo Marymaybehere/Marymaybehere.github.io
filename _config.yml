@@ -1,0 +1,29 @@
+# Technical settings for the site. You normally never need to edit this file.
+# Your name, bio, links etc. live in _data/site.yml (edit them in Pages CMS under "Site settings").
+
+title: Sara
+markdown: kramdown
+exclude: [README.md, SETUP-GUIDE.md, pages-config-backup.txt, "assets/uploads/keep.txt"]
+
+collections:
+  recipes:
+    output: true
+    permalink: /kitchen/:name/
+  farm:
+    output: true
+    permalink: /farm/:name/
+  trails:
+    output: true
+    permalink: /trails/:name/
+  art:
+    output: false
+  research:
+    output: false
+
+defaults:
+  - scope: { path: "", type: recipes }
+    values: { layout: recipe }
+  - scope: { path: "", type: farm }
+    values: { layout: entry }
+  - scope: { path: "", type: trails }
+    values: { layout: entry }

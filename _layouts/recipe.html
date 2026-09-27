@@ -1,0 +1,34 @@
+---
+layout: default
+---
+<article class="single">
+  <a class="back" href="{{ '/#kitchen' | relative_url }}">← All recipes</a>
+  <div class="recipe">
+    {% include img.html src=page.image alt=page.title v="v3" label="Recipe photo" %}
+    <div class="recipe-body">
+      {% if page.category %}<div><span class="tag">{{ page.category }}</span></div>{% endif %}
+      <h1 class="single-title">{{ page.title }}</h1>
+      {% if page.summary %}<p class="lede">{{ page.summary }}</p>{% endif %}
+      <div class="facts">
+        {% if page.prep %}<div><b>{{ page.prep }}</b><span>Prep</span></div>{% endif %}
+        {% if page.cook %}<div><b>{{ page.cook }}</b><span>Cook</span></div>{% endif %}
+        {% if page.servings %}<div><b>{{ page.servings }}</b><span>Servings</span></div>{% endif %}
+      </div>
+      <div class="cols">
+        {% if page.ingredients %}
+        <div>
+          <h4>Ingredients</h4>
+          <ul>{% for i in page.ingredients %}<li>{{ i }}</li>{% endfor %}</ul>
+        </div>
+        {% endif %}
+        {% if page.steps %}
+        <div>
+          <h4>Method</h4>
+          <ol>{% for s in page.steps %}<li>{{ s }}</li>{% endfor %}</ol>
+        </div>
+        {% endif %}
+      </div>
+      {% if content != "" %}<div class="prose">{{ content }}</div>{% endif %}
+    </div>
+  </div>
+</article>

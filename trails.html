@@ -1,0 +1,20 @@
+---
+layout: default
+title: All hikes
+permalink: /trails/
+---
+{% assign items = site.trails | sort: "date" | reverse %}
+<section class="block archive">
+  <a class="back" href="{{ '/#trails' | relative_url }}">← Home</a>
+  <p class="eyebrow">Trails</p>
+  <h1 class="single-title">{{ site.data.site.trails_title }}</h1>
+  <div class="recipe-list">
+    {% for r in items %}
+    <a class="rl" href="{{ r.url | relative_url }}">
+      {% include img.html src=r.image alt=r.title v="v2" label=" " %}
+      <div><strong>{{ r.title }}</strong><small>{{ r.date | date: "%B %Y" }}{% if r.summary %} · {{ r.summary }}{% endif %}</small></div>
+      <em>{{ r.distance | default: r.cook }}</em>
+    </a>
+    {% endfor %}
+  </div>
+</section>

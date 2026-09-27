@@ -1,0 +1,196 @@
+---
+layout: default
+---
+{% assign s = site.data.site %}
+{% assign recipes = site.recipes | sort: "date" | reverse %}
+{% assign farm = site.farm | sort: "date" | reverse %}
+{% assign trails = site.trails | sort: "date" | reverse %}
+{% assign research = site.research | sort: "order" %}
+{% assign art = site.art | sort: "year" | reverse %}
+
+<div class="hero">
+  <div>
+    <p class="eyebrow">Hello, I'm {{ s.name }}</p>
+    <h1>{{ s.headline }}</h1>
+    <p class="tagline">{{ s.tagline }}</p>
+    <p class="bio">{{ s.bio }}</p>
+  </div>
+  {% include img.html src=s.portrait alt=s.name v="v3" class="portrait" label="Your portrait" %}
+</div>
+
+<nav class="doors" aria-label="Sections">
+  <a class="door" href="#science"><span class="eyebrow">Lab</span><strong>Science</strong><small>Research, papers and CV</small></a>
+  <a class="door" href="#kitchen"><span class="eyebrow">Recipes</span><strong>Kitchen</strong><small>What I cook and how</small></a>
+  <a class="door" href="#farm"><span class="eyebrow">Field log</span><strong>Farm</strong><small>What's growing this season</small></a>
+  <a class="door" href="#studio"><span class="eyebrow">Paint &amp; film</span><strong>Studio</strong><small>Paintings and photographs</small></a>
+  <a class="door" href="#trails"><span class="eyebrow">Outside</span><strong>Trails</strong><small>Hikes worth the climb</small></a>
+</nav>
+
+<!-- SCIENCE -->
+<section class="block" id="science">
+  <div class="sec-head">
+    <div>
+      <p class="eyebrow">Science</p>
+      <h2>{{ s.science_title }}</h2>
+      <p>{{ s.science_intro }}</p>
+    </div>
+  </div>
+  <div class="research">
+    {% for r in research %}
+    <article class="proj">
+      {% include img.html src=r.image alt=r.title v="v2" label="Research image" %}
+      <h3>{{ r.title }}</h3>
+      <div class="proj-text">{{ r.content | markdownify }}</div>
+    </article>
+    {% endfor %}
+  </div>
+  <div class="pubs">
+    <div>
+      <p class="eyebrow">Selected papers</p>
+      <div class="links">
+        {% for l in s.links %}<a class="chip" href="{{ l.url }}" target="_blank" rel="noopener">{{ l.label }}</a>{% endfor %}
+        {% if s.cv and s.cv != "" %}<a class="chip" href="{{ s.cv | relative_url }}">CV (PDF)</a>{% endif %}
+      </div>
+    </div>
+    <ol>
+      {% assign papers = site.data.publications.papers | sort: "year" | reverse %}
+      {% for p in papers %}
+      <li><span class="yr">{{ p.year }}</span><div>
+        <p class="t">{% if p.url and p.url != "" %}<a href="{{ p.url }}" target="_blank" rel="noopener">{{ p.title }}</a>{% else %}{{ p.title }}{% endif %}</p>
+        <p class="j">{{ p.authors }} · {{ p.venue }}</p>
+      </div></li>
+      {% endfor %}
+    </ol>
+  </div>
+</section>
+
+<!-- KITCHEN -->
+<section class="block" id="kitchen">
+  <div class="sec-head">
+    <div>
+      <p class="eyebrow">Kitchen</p>
+      <h2>{{ s.kitchen_title }}</h2>
+      <p>{{ s.kitchen_intro }}</p>
+    </div>
+    {% if recipes.size > 6 %}<a class="more" href="{{ '/kitchen/' | relative_url }}">All {{ recipes.size }} recipes →</a>{% endif %}
+  </div>
+  {% assign f = recipes.first %}
+  {% if f %}
+  <div class="kitchen">
+    <a class="recipe feature" href="{{ f.url | relative_url }}">
+      {% include img.html src=f.image alt=f.title v="v3" label="Recipe photo" %}
+      <div class="recipe-body">
+        {% if f.category %}<div><span class="tag">{{ f.category }}</span></div>{% endif %}
+        <h3>{{ f.title }}</h3>
+        {% if f.summary %}<p class="muted">{{ f.summary }}</p>{% endif %}
+        <div class="facts">
+          {% if f.prep %}<div><b>{{ f.prep }}</b><span>Prep</span></div>{% endif %}
+          {% if f.cook %}<div><b>{{ f.cook }}</b><span>Cook</span></div>{% endif %}
+          {% if f.servings %}<div><b>{{ f.servings }}</b><span>Servings</span></div>{% endif %}
+        </div>
+        <span class="read">Read the recipe →</span>
+      </div>
+    </a>
+    <div class="recipe-list">
+      {% for r in recipes offset:1 limit:5 %}
+      <a class="rl" href="{{ r.url | relative_url }}">
+        {% include img.html src=r.image alt=r.title v="v2" label=" " %}
+        <div><strong>{{ r.title }}</strong><small>{{ r.category }}{% if r.summary %} · {{ r.summary }}{% endif %}</small></div>
+        <em>{{ r.cook | default: r.prep }}</em>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+  {% endif %}
+</section>
+
+<!-- FARM -->
+<section class="block" id="farm">
+  <div class="sec-head">
+    <div>
+      <p class="eyebrow">Farm</p>
+      <h2>{{ s.farm_title }}</h2>
+      <p>{{ s.farm_intro }}</p>
+    </div>
+    {% if farm.size > 4 %}<a class="more" href="{{ '/farm/' | relative_url }}">Full log →</a>{% endif %}
+  </div>
+  <div class="farm">
+    {% assign lead = farm.first %}
+    {% include img.html src=lead.image alt=lead.title v="v2" class="farm-img" label="Farm photo" %}
+    <ol class="log">
+      {% for e in farm limit:4 %}
+      <li>
+        <p class="when">{{ e.date | date: "%B %Y" }}</p>
+        <h3><a href="{{ e.url | relative_url }}">{{ e.title }}</a></h3>
+        {% if e.summary %}<p>{{ e.summary }}</p>{% endif %}
+        {% if e.tags and e.tags.size > 0 %}<div class="grow">{% for t in e.tags %}<span class="tag">{{ t }}</span>{% endfor %}</div>{% endif %}
+      </li>
+      {% endfor %}
+    </ol>
+  </div>
+</section>
+
+<!-- STUDIO -->
+<section class="block" id="studio">
+  <div class="sec-head">
+    <div>
+      <p class="eyebrow">Studio</p>
+      <h2>{{ s.studio_title }}</h2>
+      <p>{{ s.studio_intro }}</p>
+    </div>
+    <div class="filters" role="group" aria-label="Filter gallery">
+      <button type="button" id="f-all" data-f="all" aria-pressed="true">All</button>
+      <button type="button" id="f-paint" data-f="Painting" aria-pressed="false">Paintings</button>
+      <button type="button" id="f-photo" data-f="Photograph" aria-pressed="false">Photography</button>
+    </div>
+  </div>
+  <div class="gallery" id="gallery">
+    {% for a in art %}
+    <figure data-k="{{ a.kind }}" class="{% if a.wide %}wide{% endif %}">
+      {% if a.image and a.image != "" %}<a href="{{ a.image | relative_url }}" target="_blank" rel="noopener">{% endif %}
+      {% assign m = forloop.index | modulo: 4 | plus: 2 %}{% assign vv = "v" | append: m %}
+      {% include img.html src=a.image alt=a.title v=vv label=a.kind %}
+      {% if a.image and a.image != "" %}</a>{% endif %}
+      <figcaption>{{ a.title }}<span>{{ a.medium }}{% if a.year %} · {{ a.year }}{% endif %}</span></figcaption>
+    </figure>
+    {% endfor %}
+  </div>
+</section>
+
+<!-- TRAILS -->
+<section class="block" id="trails">
+  <div class="sec-head">
+    <div>
+      <p class="eyebrow">Trails</p>
+      <h2>{{ s.trails_title }}</h2>
+      <p>{{ s.trails_intro }}</p>
+    </div>
+    {% if trails.size > 6 %}<a class="more" href="{{ '/trails/' | relative_url }}">All {{ trails.size }} hikes →</a>{% endif %}
+  </div>
+  <div class="trails">
+    {% for h in trails limit:6 %}
+    <a class="hike" href="{{ h.url | relative_url }}">
+      {% include img.html src=h.image alt=h.title v="v4" label="Hike photo" %}
+      <h3>{{ h.title }}</h3>
+      <div class="stats">
+        {% if h.distance %}<span>{{ h.distance }}<small>Distance</small></span>{% endif %}
+        {% if h.gain %}<span>{{ h.gain }}<small>Gain</small></span>{% endif %}
+        {% if h.level %}<span>{{ h.level }}<small>Level</small></span>{% endif %}
+      </div>
+      {% if h.summary %}<p>{{ h.summary }}</p>{% endif %}
+    </a>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <p class="eyebrow">Contact</p>
+  <h2>Say hello</h2>
+  <div class="email">
+    <code id="addr">{{ s.email }}</code>
+    <button type="button" id="copy">Copy email</button>
+  </div>
+  <div class="links">
+    {% for l in s.links %}<a class="chip" href="{{ l.url }}" target="_blank" rel="noopener">{{ l.label }}</a>{% endfor %}
+  </div>
+</section>

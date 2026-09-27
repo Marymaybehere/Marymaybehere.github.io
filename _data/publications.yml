@@ -1,0 +1,16 @@
+papers:
+  - title: Your paper title goes here
+    authors: Author A, Sara, Author C
+    venue: Journal name
+    year: 2026
+    url: ""
+  - title: Another paper title
+    authors: Sara, Author B
+    venue: Journal name
+    year: 2025
+    url: ""
+  - title: A third paper or preprint
+    authors: Sara, Author B, Author C
+    venue: bioRxiv
+    year: 2024
+    url: ""

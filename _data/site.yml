@@ -1,0 +1,29 @@
+name: Sara
+tagline: Biophysicist · painter · farmer · cook · photographer · hiker
+headline: I study how bacteria grow, and I grow a few things myself.
+bio: >-
+  By day I work on the physics of bacterial colonies: how they spread, how they stop,
+  and how droplets decide where cells land. The rest of the time I'm in the garden,
+  at the easel, in the kitchen, or somewhere on a trail with a camera. This is where I keep all of it.
+portrait: ""
+email: you@example.com
+links:
+  - label: Google Scholar
+    url: https://scholar.google.com
+  - label: ORCID
+    url: https://orcid.org
+  - label: Instagram
+    url: https://instagram.com
+cv: ""
+
+science_title: Physics of living surfaces
+science_intro: I combine experiments and mathematical models to understand how bacterial communities organize themselves on surfaces.
+kitchen_title: Recipes I keep coming back to
+kitchen_intro: Mostly from the garden, tested more times than I'd like to admit.
+farm_title: Notes from the field
+farm_intro: A running log of what I planted, what worked and what the weather had other plans for.
+studio_title: Paintings & photographs
+studio_intro: Watercolors, oils and whatever the camera caught along the way.
+trails_title: Hikes worth the climb
+trails_intro: Where I went, how hard it was, and whether I'd go again.
+footer_note: Made with paint, soil and code.

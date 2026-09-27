@@ -1,0 +1,31 @@
+---
+layout: default
+---
+{% assign section = page.collection %}
+<article class="single">
+  {% if section == "trails" %}
+    <a class="back" href="{{ '/#trails' | relative_url }}">← All hikes</a>
+  {% else %}
+    <a class="back" href="{{ '/#farm' | relative_url }}">← Farm log</a>
+  {% endif %}
+  <p class="eyebrow">{{ page.date | date: "%B %Y" }}</p>
+  <h1 class="single-title">{{ page.title }}</h1>
+  {% if page.summary %}<p class="lede">{{ page.summary }}</p>{% endif %}
+  {% if section == "trails" %}
+    <div class="stats big">
+      {% if page.distance %}<span>{{ page.distance }}<small>Distance</small></span>{% endif %}
+      {% if page.gain %}<span>{{ page.gain }}<small>Gain</small></span>{% endif %}
+      {% if page.level %}<span>{{ page.level }}<small>Level</small></span>{% endif %}
+    </div>
+  {% endif %}
+  {% if page.tags and page.tags.size > 0 %}
+    <div class="grow">{% for t in page.tags %}<span class="tag">{{ t }}</span>{% endfor %}</div>
+  {% endif %}
+  {% include img.html src=page.image alt=page.title v="v2" class="single-img" %}
+  <div class="prose">{{ content }}</div>
+  {% if page.gallery and page.gallery.size > 0 %}
+    <div class="mini-gallery">
+      {% for g in page.gallery %}<img class="pic" src="{{ g | relative_url }}" alt="" loading="lazy">{% endfor %}
+    </div>
+  {% endif %}
+</article>
