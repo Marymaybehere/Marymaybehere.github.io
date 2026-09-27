@@ -53,7 +53,7 @@ layout: default
       </div>
     </div>
     <ol>
-      {% assign papers = site.data.publications.papers | sort: "year" | reverse %}
+      {% assign papers = site.data.publications.papers %}{% if papers %}{% assign papers = papers | sort: "year" | reverse %}{% endif %}
       {% for p in papers %}
       <li><span class="yr">{{ p.year }}</span><div>
         <p class="t">{% if p.url and p.url != "" %}<a href="{{ p.url }}" target="_blank" rel="noopener">{{ p.title }}</a>{% else %}{{ p.title }}{% endif %}</p>
