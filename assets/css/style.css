@@ -6,7 +6,7 @@
   --sans:"Instrument Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
   --mono:"IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
 }
-@media (prefers-color-scheme: dark){
+@media (prefers-color-scheme: light){
   :root:not([data-theme="light"]){
     color-scheme:dark;
     --paper:#1C1B18; --paper-2:#25241F; --ink:#EDE9E0; --ink-2:#A7A194; --rule:#37352E;
