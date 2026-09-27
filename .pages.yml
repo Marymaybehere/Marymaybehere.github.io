@@ -1,0 +1,151 @@
+# Pages CMS configuration: this file creates the editing forms you see at app.pagescms.org
+media:
+  input: assets/uploads
+  output: /assets/uploads
+
+content:
+  - name: site
+    label: Site settings
+    type: file
+    path: _data/site.yml
+    fields:
+      - { name: name, label: Your name, type: string, required: true }
+      - { name: tagline, label: Tagline, type: string, description: "Short line under the headline, e.g. Biophysicist · painter · farmer" }
+      - { name: headline, label: Homepage headline, type: string }
+      - { name: bio, label: Short bio, type: text }
+      - { name: portrait, label: Portrait photo, type: image }
+      - { name: email, label: Email shown on the site, type: string }
+      - name: links
+        label: Links (Scholar, ORCID, Instagram…)
+        type: object
+        list: true
+        fields:
+          - { name: label, label: Label, type: string }
+          - { name: url, label: Web address, type: string }
+      - { name: cv, label: CV (PDF), type: file }
+      - { name: science_title, label: Science section title, type: string }
+      - { name: science_intro, label: Science section intro, type: text }
+      - { name: kitchen_title, label: Kitchen section title, type: string }
+      - { name: kitchen_intro, label: Kitchen section intro, type: text }
+      - { name: farm_title, label: Farm section title, type: string }
+      - { name: farm_intro, label: Farm section intro, type: text }
+      - { name: studio_title, label: Studio section title, type: string }
+      - { name: studio_intro, label: Studio section intro, type: text }
+      - { name: trails_title, label: Trails section title, type: string }
+      - { name: trails_intro, label: Trails section intro, type: text }
+      - { name: footer_note, label: Footer note, type: string }
+
+  - name: research
+    label: Research projects
+    type: collection
+    path: _research
+    view:
+      fields: [title, order]
+    fields:
+      - { name: title, label: Project title, type: string, required: true }
+      - { name: image, label: Image, type: image }
+      - { name: order, label: "Position (1 = first)", type: number, required: true }
+      - { name: body, label: Short description, type: rich-text }
+
+  - name: publications
+    label: Publications
+    type: file
+    path: _data/publications.yml
+    fields:
+      - name: papers
+        label: Papers
+        type: object
+        list: true
+        fields:
+          - { name: title, label: Title, type: string }
+          - { name: authors, label: Authors, type: string }
+          - { name: venue, label: Journal or venue, type: string }
+          - { name: year, label: Year, type: number }
+          - { name: url, label: Link (optional), type: string }
+
+  - name: recipes
+    label: Kitchen (recipes)
+    type: collection
+    path: _recipes
+    filename: "{fields.title}.md"
+    view:
+      fields: [title, category, date]
+      default:
+        sort: date
+        order: desc
+    fields:
+      - { name: title, label: Recipe name, type: string, required: true }
+      - { name: date, label: Date, type: date, required: true, options: { format: "yyyy-MM-dd" } }
+      - { name: image, label: Photo, type: image }
+      - { name: category, label: Category, type: string, description: "e.g. Breakfast, Bread, From the garden" }
+      - { name: summary, label: One-line description, type: string }
+      - { name: prep, label: Prep time, type: string, description: "e.g. 20 min" }
+      - { name: cook, label: Cook time, type: string, description: "e.g. 45 min" }
+      - { name: servings, label: Servings, type: string }
+      - { name: ingredients, label: Ingredients, type: string, list: true }
+      - { name: steps, label: Steps, type: text, list: true }
+      - { name: body, label: Notes and story, type: rich-text }
+
+  - name: farm
+    label: Farm log
+    type: collection
+    path: _farm
+    filename: "{year}-{month}-{fields.title}.md"
+    view:
+      fields: [title, date]
+      default:
+        sort: date
+        order: desc
+    fields:
+      - { name: title, label: Title, type: string, required: true }
+      - { name: date, label: Date, type: date, required: true, options: { format: "yyyy-MM-dd" } }
+      - { name: image, label: Main photo, type: image }
+      - { name: summary, label: Short summary, type: text }
+      - { name: tags, label: "Tags (crops, tasks…)", type: string, list: true }
+      - { name: gallery, label: More photos, type: image, list: true }
+      - { name: body, label: Full entry, type: rich-text }
+
+  - name: art
+    label: Studio (paintings & photos)
+    type: collection
+    path: _art
+    filename: "{fields.title}.md"
+    view:
+      fields: [title, kind, year]
+    fields:
+      - { name: title, label: Title, type: string, required: true }
+      - { name: image, label: Image, type: image, required: true }
+      - name: kind
+        label: Type
+        type: select
+        required: true
+        options:
+          values: [Painting, Photograph]
+      - { name: medium, label: "Medium (Oil, Watercolor, 35 mm…)", type: string }
+      - { name: year, label: Year, type: number, required: true }
+      - { name: wide, label: Show extra wide, type: boolean, description: "Good for landscapes" }
+
+  - name: trails
+    label: Trails (hikes)
+    type: collection
+    path: _trails
+    filename: "{fields.title}.md"
+    view:
+      fields: [title, date, level]
+      default:
+        sort: date
+        order: desc
+    fields:
+      - { name: title, label: Hike name, type: string, required: true }
+      - { name: date, label: Date, type: date, required: true, options: { format: "yyyy-MM-dd" } }
+      - { name: image, label: Main photo, type: image }
+      - { name: distance, label: Distance, type: string, description: "e.g. 12.4 km" }
+      - { name: gain, label: Elevation gain, type: string, description: "e.g. 640 m" }
+      - name: level
+        label: Difficulty
+        type: select
+        options:
+          values: [Easy, Moderate, Hard]
+      - { name: summary, label: Short summary, type: text }
+      - { name: gallery, label: More photos, type: image, list: true }
+      - { name: body, label: Full write-up, type: rich-text }
